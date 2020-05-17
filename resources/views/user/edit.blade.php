@@ -5,7 +5,11 @@
 @section('content')
 
 <div class="box box-primary">
-
+<div class="box-header with-border">
+    <h3 class="box-title">Cadastro de Usuários</h3>
+ </div>
+ <div role="form">
+ <div class="box-body">
     <div class="row">
             <div class="panel panel-default">
             @include('sweet::alert')

@@ -2,54 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Event;
-use MaddHatter\LaravelFullcalendar\Facades\Calendar;
-use alert;
+use App\Http\Requests\EventRequest;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    //Função responsável por retornar a view do Criar Evento
-public function createEvent()
+    public function loadEvents(Request $request)
     {
-        return view('createevent');
+
+        $returnedColumns = ['id', 'title', 'start', 'end', 'color', 'description'];
+
+        $start = (!empty($request->start)) ? ($request->start) : ('');
+        $end = (!empty($request->end)) ? ($request->end) : ('');
+
+        /** Retornaremos apenas os eventos ENTRE as datas iniciais e finais visiveis no calendário */
+        $events = Event::whereBetween('start', [$start, $end])->get($returnedColumns);
+
+        return response()->json($events);
+
     }
-    //Função responsável por registrar os dados no banco de dados
-public function store(Request $request)
+
+    public function store(EventRequest $request)
     {
-        $event= new Event();
-        $event->title=$request->get('title');
-        $event->start_date=$request->get('startdate');
-        $event->end_date=$request->get('enddate');
+        Event::create($request->all());
+
+        return response()->json(true);
+    }
+
+    public function update(EventRequest $request)
+    {
+        $event = Event::where('id', $request->id)->first();
+
+        $event->fill($request->all());
+
         $event->save();
-        return redirect('event')->with('success', 'Event has been added');
+
+        return response()->json(true);
     }
-    //Função responsável por definir os eventos no Calendário no mometno da exibição na view junto com css e js
-public function calender()
-            {
-                $events = [];
-                $data = Event::all();
-                if($data->count())
-                 {
-                    
-                    foreach ($data as $key => $value) 
-                    {
-                        
-                        $events[] = Calendar::event(
-                            $value->title,
-                            false,
-                            new \DateTime($value->start_date),
-                            new \DateTime($value->end_date),
-                            null,
-                            // Add color
-                         [
-                             'color' => '#000000',
-                             'textColor' => '#008900',
-                         ]
-                        );
-                    }
-                }
-                $calendar = Calendar::addEvents($events);
-                return view('calendar', compact('calendar'));
-            }
+
+    public function destroy(Request $request)
+    {
+        Event::where('id', $request->id)->delete();
+
+        return response()->json(true);
+    }
 }

@@ -52,7 +52,7 @@ class UserController extends Controller
         }
 
         $user = auth()->user();
-         return view('profile', ['user'=>Auth::user()]);
+         return view('profile', ['User'=>Auth::user()]);
 
     }
 
@@ -90,34 +90,28 @@ class UserController extends Controller
     public function save(UserRequest $request)
     {
 
+        if($request['password']!=null){
+            $request['password'] = bcrypt( $request['password']);
+            }else{    
+            unset( $request['password']);
+            }
+        $tipopessoa = $request->get('profile');
+        
             $insert = 0;
            try{
                 $insert = user::create($request->all()); 
                 
            }catch(Exception $e){
-               echo('Erro!');
-        }finally{
-
-            $tipopessoa = $request->get('profile');
-
-            if ($insert){    // Verifica se inseriu com sucesso
-                if($request['password']!=null){
-                    $request['password'] = bcrypt( $request['password']);
-                    }else{    
-                    unset( $request['password']);
-                    }
+                return redirect()
+                        ->back()
+                        ->with('error', 'Dados cadastrais Incompletos!');
+        }finally{ 
                    // Verifica se inseriu com sucesso
-                            return redirect()
-                                    ->route('User.index')
-                                    ->with('success', 'Cadastrado com Sucesso!');
+        return redirect()
+                ->route('User.index')
+                ->with('success', 'Cadastrado com Sucesso!');
             }
-       return redirect()
-                    ->back()
-                    ->with('error', 'Dados cadastrais Incompletos!');
         }
-
-        
-    }
     //Responsavel por trazer a tela de Edição de Usuario
     public function edit ($id)
     {

@@ -20,20 +20,18 @@ class CreateUsersTable extends Migration
             $table->String('genre', 1)->nullable();
             $table->string('email')->unique();
             $table->string('user')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
             $table->String('telephone', 15)->nullable();
             $table->String('sector', 45)->nullable();
+            $table->String('description', 45)->nullable();
+            $table->string('avatar')->default('default.jpg');
+            $table->boolean('active')->default(true);
 
             //Chave estrangeira de Perfil
             $table->integer('profile')->unsigned()->nullable();
             $table->foreign('profile')->references('id')->on('profiles');
-            // Chave estrangeira de Perfil
-
-            $table->boolean('active')->default(true);
-            $table->String('description', 45)->nullable();
-            $table->string('avatar')->default('default.jpg');
+            // Chave estrangeira de Perfil           
             $table->rememberToken();
             $table->timestamps();
 

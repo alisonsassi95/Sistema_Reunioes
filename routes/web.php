@@ -15,18 +15,20 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+
+
     //route::view('/login', "auth.login")->name('login');
     Route::get('/login', 'Auth\LoginController@isLogged')->name('login');
     Route::post('/authentication', 'Auth\LoginController@authentication')->name('authentication');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
     //HOME
-    Route::view('/home', 'home')->name('home'); 
-    Route::get('/home', ['uses'=>'HomeController@index', 'as' => 'home']);  
+    Route::view('/home', 'home')->name('home');
+    Route::get('/home', ['uses'=>'HomeController@index', 'as' => 'home']);
 
 
     //Room
-    Route::get('/room', ['uses'=>'RoomController@index', 'as' => 'room.index']);  
+    Route::get('/room', ['uses'=>'RoomController@index', 'as' => 'room.index']);
     Route::get('/room/add', ['uses'=>'RoomController@add', 'as' => 'room.add']);
     Route::get('/room/menu', ['uses'=>'RoomController@menu', 'as' => 'room.menu']);
     Route::post('/room/save', ['uses'=>'RoomController@save', 'as' => 'room.save']);
@@ -35,7 +37,7 @@ Route::get('/', function () {
     Route::get('/room/delete/{id}', ['uses'=>'RoomController@delete', 'as' => 'room.delete']);
 
     //Equipamentos
-    Route::get('/equipament', ['uses'=>'EquipamentController@index', 'as' => 'equipament.index']);  
+    Route::get('/equipament', ['uses'=>'EquipamentController@index', 'as' => 'equipament.index']);
     Route::get('/equipament/add', ['uses'=>'EquipamentController@add', 'as' => 'equipament.add']);
     Route::get('/equipament/menu', ['uses'=>'EquipamentController@menu', 'as' => 'equipament.menu']);
     Route::post('/equipament/save', ['uses'=>'EquipamentController@save', 'as' => 'equipament.save']);
@@ -54,9 +56,7 @@ Route::get('/', function () {
     Route::get('/User/load/{id}', ['uses'=>'UserController@load', 'as' => 'User.load']);
     Route::get('/User/delete/{id}', ['uses'=>'UserController@delete', 'as' => 'User.delete']);
     Route::post('/Profile/update/{id}', ['uses'=>'UserController@updateProfile', 'as' => 'User.updateProfile']);
-    
-    
-    
+
     //Routes people
     Route::get('/people', ['uses'=>'PeopleController@index', 'as' => 'people.index']);
     Route::get('/people/add', ['uses'=>'PeopleController@add', 'as' => 'people.add']);
@@ -65,41 +65,64 @@ Route::get('/', function () {
     Route::put('/people/update/{id}', ['uses'=>'PeopleController@update', 'as' => 'people.update']);
     Route::get('/people/delete/{id}', ['uses'=>'PeopleController@delete', 'as' => 'people.delete']);
 
+
+    Route::get('/homeClient', 'FullCalendarController@index')->name('index');
+    // Eventos
+    Route::get('/load-events', 'EventController@loadEvents')->name('routeLoadEvents');
+    Route::put('/event-update', 'EventController@update')->name('routeEventUpdate');
+    Route::post('/event-store', 'EventController@store')->name('routeEventStore');
+    Route::delete('/event-destroy', 'EventController@destroy')->name('routeEventDelete');
+    
+    
+    /**
+     * Rotas para Eventos Rápidos
+     */
+    Route::delete('/fast-event-destroy', 'FastEventController@destroy')->name('routeFastEventDelete');
+    Route::put('/fast-event-update', 'FastEventController@update')->name('routeFastEventUpdate');
+    Route::post('/fast-event-store', 'FastEventController@store')->name('routeFastEventStore');
+    
+
     //-------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    //Reuniao
+    Route::get('/meetting', ['uses'=>'MeetingController@index', 'as' => 'meeting.index']);
+
+
+
+/*
     //calendar
     Route::get('event/add','ScheduleController@createEvent');
     Route::get('/event/add/client','ScheduleController@createEventCliente');
     Route::post('event/add','ScheduleController@store');
     Route::post('event/client','ScheduleController@storeClient');
     Route::get('event','ScheduleController@calender');
-
+*/
 
 Route::group( [ 'middleware' => 'auth'], function()
 {
 
 
-    Route::group( [ 'middleware' => 'auth'], function() 
+    Route::group( [ 'middleware' => 'auth'], function()
     {
 
     //Perfil do cliente (crair middleware client) https://blog.especializati.com.br/middleware-no-laravel-filtros/
-    Route::view('/Profile', 'profile')->name('profile')->middleware('auth'); 
+    Route::view('/Profile', 'profile')->name('profile')->middleware('auth');
     Route::get('/Profile', ['uses'=>'UserController@profile', 'as' => 'profile']);
     Route::post('/Profile', ['uses'=>'UserController@profile', 'as' => 'profile']);
-    //Route::view('/ExamesPaciente', 'paciente')->name('paciente')->middleware('auth'); 
+    //Route::view('/ExamesPaciente', 'paciente')->name('paciente')->middleware('auth');
     Route::get('/ExamesPaciente', ['uses'=>'ExamController@indexPaciente', 'as' => 'paciente']);
-    
+
     Route::post('/perfil', ['uses'=>'UserController@perfilAtualiza','as'=>'User.perfilAtualiza']);
     Route::get('/diagnotico/user', ['uses'=>'ExamController@indexDiagnostic', 'as' => 'Exam.ViewExamUser']);
 
 });
 
 
-    
-    //Tipo de Exame 
+
+    //Tipo de Exame
     Route::post('/equipament/add/examtype', ['uses'=>'examtypeController@save', 'as' => 'examtype.save']);
 
-    
+
 
 
     //Routes Exam
@@ -114,14 +137,14 @@ Route::group( [ 'middleware' => 'auth'], function()
     Route::post('/ExamImage/uploadImages', ['uses'=>'ExamImageController@uploadImages', 'as' => 'Exam.uploadImages']);
     Route::get('/ExamImage/images/{id}', ['uses'=>'ExamImageController@images', 'as' => 'Exam.images']);
     Route::post('/ExamImage/images', ['uses'=>'ExamImageController@UparImagens', 'as' => 'Examimage.UparImagens']);
-    
+
     //Routes visualizar imagens
     Route::get('/ViewExam', ['uses'=>'ExamController@ViewExam', 'as' => 'Exam.ViewExam']);
     Route::get('/ViewExam/{id}', ['uses'=>'ExamController@visualizar', 'as' => 'Exam.visualizar']);
-    
 
 
-//Medicos 
+
+//Medicos
 Route::get('/Medicos', ['uses'=>'PeopleController@indexMedicos', 'as' => 'people.indexMedicos']);
 
 //Pacientes
@@ -145,7 +168,7 @@ Route::Post('/people/add/user', ['uses'=>'UserController@save', 'as' => 'user.sa
 
 
 
-    
+
 Route::get('/people/detail/{id}', ['uses'=>'PeopleController@detail', 'as' => 'people.detail']);
 Route::get('/telefone/add/{id}', ['uses'=>'TelefoneController@add', 'as' => 'telefone.add']);
 Route::post('/telefone/save/{id}', ['uses'=>'TelefoneController@save', 'as' => 'telefone.save']);

@@ -17,6 +17,7 @@ class CreateProfilesTable extends Migration
             $table->increments('id')->unique();
             $table->string('name', 45);
             $table->text('description')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
