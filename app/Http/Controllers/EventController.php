@@ -11,12 +11,15 @@ class EventController extends Controller
     public function loadEvents(Request $request)
     {
 
-        $returnedColumns = ['id', 'title', 'start', 'end', 'color', 'description'];
+        $returnedColumns = ['id', 'title', 'start', 'end', 'color', 'description', 'condition', 'priority', 'participants', 'room_id', 'user_id'];
 
         $start = (!empty($request->start)) ? ($request->start) : ('');
         $end = (!empty($request->end)) ? ($request->end) : ('');
 
         /** Retornaremos apenas os eventos ENTRE as datas iniciais e finais visiveis no calendário */
+
+        /*FALTA COLOCAR O FILTRO DO USUÁRIO*/
+        /* FALTA COLOCAR O FILTRO DA SALAS */
         $events = Event::whereBetween('start', [$start, $end])->get($returnedColumns);
 
         return response()->json($events);

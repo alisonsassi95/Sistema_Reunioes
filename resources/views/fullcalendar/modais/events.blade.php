@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="modalCalendar" tabindex="-1" role="dialog" aria-labelledby="titleModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -39,6 +38,28 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="participants_id" class="col-sm-4 col-form-label">Participantes</label>
+                        <div class="col-sm-8">
+                                <select class="selectpicker" name="participants_id" id="participants_id" multiple data-live-search="true">
+                                <option>Mustard</option>
+                                <option>Ketchup</option>
+                                <option>Relish</option>
+                                <option>Mustard1</option>
+                                <option>Ketchup1</option>
+                                <option>Relish1</option>
+                                <option>Mustard2</option>
+                                <option>Ketchup2</option>
+                                <option>Relish2</option>
+                                </select>
+                        </div>
+                        <br>
+                        <label for="room_id" class="col-sm-4 col-form-label">Salas</label>
+                        <div class="col-sm-8">
+                                        <select class="form-control"  name="profile" id="profile">
+                                           <!-- <option value= "{ {  $room->id } }" >{{ $room->name } } </option> -->
+                                        </select>   
+                        </div>
+                        <br>
                         <label for="description" class="col-sm-4 col-form-label">Descrição</label>
                         <div class="col-sm-8">
                             <textarea name="description" id="description" cols="40" rows="4"></textarea>

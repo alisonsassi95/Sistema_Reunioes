@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
 
     $('.date-time').mask('00/00/0000 00:00:00');
     $('.time').mask('00:00:00');
@@ -9,7 +9,7 @@ $(function () {
         }
     });
 
-    $("#newFastEvent").click(function () {
+    $("#newFastEvent").click(function() {
 
         clearMessages('.message');
         resetForm("#formFastEvent");
@@ -19,11 +19,11 @@ $(function () {
 
         $('#modalFastEvent').modal('show');
         $("#modalFastEvent #titleModal").text('Criar Evento Rápido');
-        $("#modalFastEvent button.deleteFastEvent").css("display","none");
+        $("#modalFastEvent button.deleteFastEvent").css("display", "none");
     });
 
 
-    $(document).on('click','.event', function () {
+    $(document).on('click', '.event', function() {
 
         clearMessages('.message');
         resetForm("#formFastEvent");
@@ -34,7 +34,7 @@ $(function () {
 
         $('#modalFastEvent').modal('show');
         $("#modalFastEvent #titleModal").text('Alterar Evento Rápido');
-        $("#modalFastEvent button.deleteFastEvent").css("display","flex");
+        $("#modalFastEvent button.deleteFastEvent").css("display", "flex");
 
         $("#modalFastEvent input[name='id']").val(Event.id);
         $("#modalFastEvent input[name='title']").val(Event.title);
@@ -44,7 +44,7 @@ $(function () {
 
     });
 
-    $(".saveFastEvent").click(function () {
+    $(".saveFastEvent").click(function() {
 
         let id = $("#modalFastEvent input[name='id']").val();
 
@@ -65,20 +65,20 @@ $(function () {
 
         let route;
 
-        if(id == ''){
+        if (id == '') {
             route = routeEvents('routeFastEventStore');
-        }else{
+        } else {
             route = routeEvents('routeFastEventUpdate');
             Event.id = id;
             Event._method = 'PUT';
         }
 
-        sendEvent(route,Event);
+        sendEvent(route, Event);
 
     });
 
 
-    $(".deleteFastEvent").click(function () {
+    $(".deleteFastEvent").click(function() {
 
         let id = $("#modalFastEvent input[name='id']").val();
 
@@ -91,14 +91,14 @@ $(function () {
         let route = routeEvents('routeFastEventDelete');
 
         showModalUpdateFastEvent = true;
-        sendEvent(route,Event);
+        sendEvent(route, Event);
 
         $(`#boxFastEvent${id}`).remove();
 
     });
 
 
-    $(".deleteEvent").click(function () {
+    $(".deleteEvent").click(function() {
 
         let id = $("#modalCalendar input[name='id']").val();
 
@@ -109,45 +109,45 @@ $(function () {
 
         let route = routeEvents('routeEventDelete');
 
-        sendEvent(route,Event);
+        sendEvent(route, Event);
 
     });
 
-   $(".saveEvent").click(function () {
+    $(".saveEvent").click(function() {
 
-       let id = $("#modalCalendar input[name='id']").val();
+        let id = $("#modalCalendar input[name='id']").val();
 
-       let title = $("#modalCalendar input[name='title']").val();
+        let title = $("#modalCalendar input[name='title']").val();
 
-       let start = moment($("#modalCalendar input[name='start']").val(),"DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DD HH:mm:ss");
+        let start = moment($("#modalCalendar input[name='start']").val(), "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DD HH:mm:ss");
 
-       let end = moment($("#modalCalendar input[name='end']").val(),"DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DD HH:mm:ss");
+        let end = moment($("#modalCalendar input[name='end']").val(), "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DD HH:mm:ss");
 
-       let color = $("#modalCalendar input[name='color']").val();
+        let color = $("#modalCalendar input[name='color']").val();
 
-       let description = $("#modalCalendar textarea[name='description']").val();
+        let description = $("#modalCalendar textarea[name='description']").val();
 
-       let Event = {
-           title: title,
-           start: start,
-           end: end,
-           color: color,
-           description: description,
-       };
+        let Event = {
+            title: title,
+            start: start,
+            end: end,
+            color: color,
+            description: description,
+        };
 
-       let route;
+        let route;
 
-       if(id == ''){
-           route = routeEvents('routeEventStore');
-       }else{
-           route = routeEvents('routeEventUpdate');
-           Event.id = id;
-           Event._method = 'PUT';
-       }
+        if (id == '') {
+            route = routeEvents('routeEventStore');
+        } else {
+            route = routeEvents('routeEventUpdate');
+            Event.id = id;
+            Event._method = 'PUT';
+        }
 
-       sendEvent(route,Event);
+        sendEvent(route, Event);
 
-   });
+    });
 
 
 });
@@ -163,14 +163,14 @@ function sendEvent(route, data_) {
         data: data_,
         method: 'POST',
         dataType: 'json',
-        success: function (json) {
+        success: function(json) {
 
             if (json) {
                 objCalendar.refetchEvents();
                 $("#modalCalendar").modal('hide');
             }
 
-            if(showModalUpdateFastEvent === true){
+            if (showModalUpdateFastEvent === true) {
                 showModalUpdateFastEvent = false;
                 $("#modalFastEvent").modal('hide');
 
@@ -180,11 +180,12 @@ function sendEvent(route, data_) {
                 $(`#boxFastEvent${data_.id}`).text(data_.title);
                 $(`#boxFastEvent${data_.id}`).css({
                     "backgroundColor": `${data_.color}`,
-                    "border": `1px solid ${data_.color}`});
+                    "border": `1px solid ${data_.color}`
+                });
 
             }
 
-            if(showModalCreateFastEvent === true){
+            if (showModalCreateFastEvent === true) {
                 showModalCreateFastEvent = false;
                 $("#modalFastEvent").modal('hide');
 
@@ -200,7 +201,7 @@ function sendEvent(route, data_) {
 
             }
         },
-        error:function (json) {
+        error: function(json) {
 
             let responseJSON = json.responseJSON.errors;
 
@@ -213,22 +214,23 @@ function loadErrors(response) {
 
     let boxAlert = `<div class="alert alert-danger">`;
 
-    for (let fields in response){
+    for (let fields in response) {
         boxAlert += `<span>${response[fields]}</span><br/>`;
     }
 
     boxAlert += `</div>`;
 
-    return boxAlert.replace(/\,/g,"<br/>");
+    return boxAlert.replace(/\,/g, "<br/>");
 }
 
 function routeEvents(route) {
     return document.getElementById('calendar').dataset[route];
 }
 
-function clearMessages(element){
+function clearMessages(element) {
     $(element).text('');
 }
-function resetForm(form){
+
+function resetForm(form) {
     $(form)[0].reset();
 }

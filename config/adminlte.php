@@ -110,9 +110,10 @@ return [
     'menu' => [
         '',
         [
-            'text' => 'Inicio usuário',
+            'text' => 'Inicio',
             'icon' => 'home',
             'url'  => '/homeClient',
+
         ],
         [
             'text' => 'Meu perfil',
