@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExamImagesTable extends Migration
+class CreateroomTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateExamImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('exam_images', function (Blueprint $table) {
+        Schema::create('room', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->integer('exam_id')->unsigned();
-            $table->foreign('exam_id')->references('id')->on('exams');
-            $table->string('imagem');
-            $table->dateTime('Data');
+            $table->string('name', 45)->nullable(); 
+            $table->string('location', 45)->nullable(); 
+            $table->string('number', 45)->nullable(); 
+            $table->string('capacity', 45)->nullable(); 
+            $table->text('description')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 
@@ -32,6 +33,6 @@ class CreateExamImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exam_images');
+        Schema::dropIfExists('room');
     }
 }

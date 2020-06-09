@@ -30,13 +30,9 @@ class DatabaseSeeder extends Seeder
                 ['id' => 1, 'name' => 'Notebook', 'description' => 'Notebook Dell Modelo XX ','active' => '1'],
                 ['id' => 2, 'name' => 'Projetor', 'description' => 'Projetor Epson Modelo XX ','active' => '1'],
                 ]);
-    
 
-        DB::table('peoples')->insert([
-            ['id' => 1, 'name' => 'Administrador', 'birthdate' => '2999-01-01', 'genre' => 'M', 'cpf' => '12345677890','rg' => '1234567789', 'address' => 'Rua', 'number' => '12345',  'district' => 'Admin',  'complement' => 'Sem complemento', 'cep' => '987654321', 'state' => 'RS', 'city' => 'Ijuí', 'telephone' => '9978988765', 'email' => 'Admin@Admin.com', 'obs' => 'ele é o adin', 'profile' => '1']
-            ]);
         DB::table('users')->insert(
-            ['id' => 1, 'name' => 'Administrador', 'birthdate' => '2999-01-01', 'genre' => 'M', 'email' => 'Admin@Admin.com', 'user' => 'admin', 'password' => bcrypt('admin'), 'telephone' => '9978988765', 'sector' => 'TI',  'profile' => '1',  'description' => 'ele é o adiministardor' ]
+            ['id' => 1, 'name' => 'Administrador', 'birthdate' => '2999-01-01', 'genre' => 'M', 'email' => 'Admin@Admin.com', 'user' => 'admin', 'password' => bcrypt('admin'), 'telephone' => '9978988765', 'sector' => 'TI',  'profile_id' => '1',  'description' => 'ele é o adiministardor' ]
            );
         /*
         DB::table('schedules')->insert([

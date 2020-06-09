@@ -19,6 +19,8 @@ class CreateFastEventsTable extends Migration
             $table->time('start');
             $table->time('end');
             $table->string('color', 7);
+            $table->string('room')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
 
             $table->softDeletes();

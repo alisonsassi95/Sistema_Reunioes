@@ -11,7 +11,18 @@ class EventController extends Controller
     public function loadEvents(Request $request)
     {
 
-        $returnedColumns = ['id', 'title', 'start', 'end', 'color', 'description', 'condition', 'priority', 'participants', 'room_id', 'user_id'];
+        $returnedColumns = [
+            'id',
+            'title', 
+            'start', 
+            'end', 
+            'color', 
+            'description', 
+            'condition', 
+            'priority', 
+            'participants', 
+            'room_id', 
+            'user_id'];
 
         $start = (!empty($request->start)) ? ($request->start) : ('');
         $end = (!empty($request->end)) ? ($request->end) : ('');

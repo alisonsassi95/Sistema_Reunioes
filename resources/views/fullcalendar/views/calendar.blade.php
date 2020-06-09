@@ -5,6 +5,9 @@
     @include('fullcalendar.modais.events')
     @include('fullcalendar.modais.fastEvents')
 
+        <div class="form-group">
+            <li><a href="{{ URL::previous()}}"><b>Voltar</b></a></li>
+        </div>
     <div id='external-events'>
         <h4>Eventos Rápidos</h4>
 
@@ -15,7 +18,7 @@
                     <div id="boxFastEvent{{ $fastEvent->id }}"
                         style="padding: 4px; border: 1px solid {{ $fastEvent->color }}; background-color: {{ $fastEvent->color }}"
                         class='fc-event event text-center'
-                        data-event='{"id":"{{ $fastEvent->id }}","title":"{{ $fastEvent->title }}","color":"{{ $fastEvent->color }}","start":"{{ $fastEvent->start }}","end":"{{ $fastEvent->end }}"}'>
+                        data-event='{"id":"{{ $fastEvent->id }}","title":"{{ $fastEvent->title }}","color":"{{ $fastEvent->color }}","start":"{{ $fastEvent->start }}","end":"{{ $fastEvent->end }}","room" : "$fastEvent->room"}'>
                         {{ $fastEvent->title }}
                     </div>
                 @empty

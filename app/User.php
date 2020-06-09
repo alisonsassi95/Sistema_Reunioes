@@ -25,7 +25,7 @@ class User extends Authenticatable
         'password',
         'telephone',
         'sector',
-        'profile',
+        'profile_id',
         'active',
         'img',
         'description',

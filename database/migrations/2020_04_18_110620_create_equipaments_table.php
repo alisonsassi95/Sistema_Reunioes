@@ -17,7 +17,7 @@ class CreateEquipamentsTable extends Migration
             $table->increments('id')->unique();
             $table->string('name', 45)->nullable(); 
             $table->text('description')->nullable();
-            $table->boolean('active');
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

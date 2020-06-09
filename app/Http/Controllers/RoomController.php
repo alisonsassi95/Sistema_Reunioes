@@ -30,17 +30,7 @@ class RoomController extends Controller
         $rooms = $this->roomModel->paginate(20); // whereNotNull('rg')->
         return view('room.index', ['rooms' => $rooms, 'ResEquipament' => $ResEquipament]);
     }
-    //Função responsável por exbibir o menu
-    public function menu()
-    {
-        return view('room.menu');
-    }
-
-    public function detail($id)
-    {
-        $room = Room::find($id);
-        return view('room.detail', compact('room'));
-    }
+    
     // Função responsavel por trazer a tela de cadastro de roomos
     public function add()
     {
@@ -94,15 +84,6 @@ class RoomController extends Controller
     {
         $room = Room::find($id);
        
-
-        /*if(!$room->deleteTelephone()){
-            \Session::flash('flash_message', [
-                'msg'=>"Registro não pode ser deletado",
-                'class'=>"alert-danger"
-            ]);
-            return redirect()->route('room.index');
-        }*/
-        
         $room->delete();
 
         alert()->success('', 'Deletado com Sucesso')->persistent('OK');

@@ -113,12 +113,12 @@ return [
             'text' => 'Inicio',
             'icon' => 'home',
             'url'  => '/homeClient',
+            //'can'  => 'user',
 
         ],
         [
             'text' => 'Meu perfil',
             'icon' => 'smile-o',
-            //'can'  => 'adm',
             'url'  => '/Profile',
         ],
         [
@@ -127,10 +127,15 @@ return [
             'url'  => '/event/add',
         ],
         [
+            'text' => 'Teste',
+            'icon' => 'calendar-plus-o',
+            'url'  => '/teste',
+        ],
+        [
             'text' => 'Consulta Reuniões',
             'icon' => 'cube',
-            //'can'  => 'adm',
-            'url'  => '/event',
+            'can'  => 'adm',
+            'url'  => '/eventADM',
         ],      
 
         [
@@ -139,17 +144,9 @@ return [
             'url'  => '/home',
             //'can'  => 'adm',
         ],
-       
-        [
-            'text' => 'Meu perfil',
-            'icon' => 'smile-o',
-            //'can'  => 'adm',
-            'url'  => '/Profile',
-        ],
         [
             'text'    => 'Cadastro/Consulta',
             'icon'    => 'folder-open',
-            //'can'  => 'adm',
             'submenu' => [
                 
                 [
@@ -163,11 +160,6 @@ return [
                     'url'  => '/room',
                 ],
                 [
-                    'text' => 'Perfil',
-                    'icon' => 'user',
-                    'url'  => '/Profile',
-                ],
-                [
                     'text' => 'Usuários',
                     'icon' => 'user-plus',
                     'url'  => '/User',
@@ -175,29 +167,9 @@ return [
             ],        
         ],
         [
-            'text'    => 'Agenda',
-            'icon'    => 'calendar-minus-o',
-            //'can'  => 'adm',
-            'submenu' => [
-                [
-                    'text' => 'Criar uma reunião',
-                    'icon' => 'calendar-plus-o',
-                    'url'  => '/event/add',
-                ],
-                [
-                    'text' => 'Consulta Reuniões',
-                    'icon' => 'cube',
-                    //'can'  => 'adm',
-                    'url'  => '/event',
-                ],
-                [
-                    'text' => 'Criar uma reunião',
-                    'icon' => 'calendar-plus-o',
-                    'url'  => '/event/add/client',
-                ],
-            ],
-
-              
+            'text' => 'Sair do Sistema',
+            'icon' => 'home',
+            'url'  => '/logout',
         ],
     ],
 

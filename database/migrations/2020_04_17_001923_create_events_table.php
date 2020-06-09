@@ -19,6 +19,17 @@ class CreateEventsTable extends Migration
             $table->dateTime('start');
             $table->dateTime('end');
             $table->string('color',7);
+            $table->string('condition')->nullable();
+            $table->string('priority')->nullable();
+            $table->string('participants')->nullable();
+            //Chave estrangeira de Sala
+            $table->integer('room_id')->unsigned()->nullable();
+            $table->foreign('room_id')->references('id')->on('room');
+            // Chave estrangeira de Sala 
+            //Chave estrangeira de Usuário
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            // Chave estrangeira de Usuário 
             $table->longText('description')->nullable();
 
             $table->timestamps();
@@ -26,7 +37,6 @@ class CreateEventsTable extends Migration
 
         });
     }
-
     /**
      * Reverse the migrations.
      *

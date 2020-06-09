@@ -29,10 +29,9 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index()
     {
-        $results = $this->user->paginate(20); // whereNotNull('rg')->
+        $results = $this->user->paginate(20); 
         return view('User.index',['results' => $results]);
     }
 
@@ -82,7 +81,8 @@ class UserController extends Controller
     //Responsavel por trazer a tela de cadastro de Usuários
     public function add()
     {
-        $results = user::all();
+        $results = Profile::all();
+
         return view('User.add', ['results' => $results]);
     }
 
@@ -104,7 +104,7 @@ class UserController extends Controller
            }catch(Exception $e){
                 return redirect()
                         ->back()
-                        ->with('error', 'Dados cadastrais Incompletos!');
+                        ->with('info', 'Dados cadastrais Incompletos!');
         }finally{ 
                    // Verifica se inseriu com sucesso
         return redirect()

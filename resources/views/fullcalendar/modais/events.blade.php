@@ -38,6 +38,32 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="end" class="col-sm-4 col-form-label">condition</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="condition" class="form-control" id="condition">
+                        </div>
+
+
+                        
+                    </div>
+                    <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Multiple (.select2-purple)</label>
+                    <div class="select2-purple">
+                        <select class="select2" multiple="multiple" data-placeholder="Selecione " data-dropdown-css-class="select2-purple" style="width: 100%;">
+                        <option>Alabama</option>
+                        <option>Alaska</option>
+                        <option>California</option>
+                        <option>Delaware</option>
+                        <option>Tennessee</option>
+                        <option>Texas</option>
+                        <option>Washington</option>
+                        </select>
+                    </div>
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+                    <div class="form-group row">
                         <label for="participants_id" class="col-sm-4 col-form-label">Participantes</label>
                         <div class="col-sm-8">
                                 <select class="selectpicker" name="participants_id" id="participants_id" multiple data-live-search="true">

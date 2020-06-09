@@ -28,8 +28,8 @@ class CreateUsersTable extends Migration
             $table->boolean('active')->default(true);
 
             //Chave estrangeira de Perfil
-            $table->integer('profile')->unsigned()->nullable();
-            $table->foreign('profile')->references('id')->on('profiles');
+            $table->integer('profile_id')->unsigned()->nullable();
+            $table->foreign('profile_id')->references('id')->on('profiles');
             // Chave estrangeira de Perfil           
             $table->rememberToken();
             $table->timestamps();
