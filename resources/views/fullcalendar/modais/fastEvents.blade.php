@@ -20,6 +20,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                    <label for="room" class="col-sm-4 col-form-label">Sala</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" class="col-sm-8" name="room" id="room">
+                                <option value="1">Sala 1</option>
+                                <option value="2">Sala 2</option>
+                            </select>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group row">
                         <label for="start" class="col-sm-4 col-form-label">Hora Inicial</label>
                         <div class="col-sm-8">
                             <input type="text" name="start" class="form-control time" id="start">
@@ -35,6 +45,12 @@
                         <label for="color" class="col-sm-4 col-form-label">Cor do Evento</label>
                         <div class="col-sm-8">
                             <input type="color" name="color" class="form-control" id="color">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="description" class="col-sm-4 col-form-label">Descrição</label>
+                        <div class="col-sm-8">
+                            <textarea name="description" id="description" cols="40" rows="4"></textarea>
                         </div>
                     </div>
                 </form>

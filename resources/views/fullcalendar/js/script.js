@@ -56,11 +56,17 @@ $(function() {
 
         let color = $("#modalFastEvent input[name='color']").val();
 
+        let room = $("#modalFastEvent select[name='room']").val();
+
+        let description = $("#modalFastEvent textarea[name='description']").val();
+
         let Event = {
             title: title,
             start: start,
             end: end,
             color: color,
+            room: room,
+            description: description,
         };
 
         let route;
@@ -127,12 +133,21 @@ $(function() {
 
         let description = $("#modalCalendar textarea[name='description']").val();
 
+        let room = $("#modalCalendar select[name='room']").val();
+
+        let condition = $("#modalCalendar select[name='condition']").val();
+
+        let participants_id = $("#modalCalendar select[name='participants_id']").val();
+
         let Event = {
             title: title,
             start: start,
             end: end,
             color: color,
             description: description,
+            room: room,
+            condition: condition,
+            participants_id: participants_id,
         };
 
         let route;
@@ -174,7 +189,7 @@ function sendEvent(route, data_) {
                 showModalUpdateFastEvent = false;
                 $("#modalFastEvent").modal('hide');
 
-                let stringJson = `{"id":"${data_.id}","title":"${data_.title}","color":"${data_.color}","start":"${data_.start}","end":"${data_.end}"}`;
+                let stringJson = `{"id":"${data_.id}","title":"${data_.title}","color":"${data_.color}","start":"${data_.start}","end":"${data_.end}","room":"${data_.room}","description":"${data_.description}"}`;
 
                 $(`#boxFastEvent${data_.id}`).attr('data-event', stringJson);
                 $(`#boxFastEvent${data_.id}`).text(data_.title);
@@ -182,6 +197,8 @@ function sendEvent(route, data_) {
                     "backgroundColor": `${data_.color}`,
                     "border": `1px solid ${data_.color}`
                 });
+                $(`#boxFastEvent${data_.id}`).text(data_.room);
+                $(`#boxFastEvent${data_.id}`).text(data_.description);
 
             }
 
@@ -189,7 +206,7 @@ function sendEvent(route, data_) {
                 showModalCreateFastEvent = false;
                 $("#modalFastEvent").modal('hide');
 
-                let stringJson = `{"id":"${json.created}","title":"${data_.title}","color":"${data_.color}","start":"${data_.start}","end":"${data_.end}"}`;
+                let stringJson = `{"id":"${json.created}","title":"${data_.title}","color":"${data_.color}","start":"${data_.start}","end":"${data_.end}","room":"${data_.room}","description":"${data_.description}"}`;
 
                 let newEvent = `<div id="boxFastEvent${json.created}"
                         style="padding: 4px; border: 1px solid ${data_.color}; background-color: ${data_.color}"

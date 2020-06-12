@@ -16,13 +16,17 @@ class FastEventTableSeeder extends Seeder
                 'title' => 'Almoço c/cliente',
                 'start' => '11:30:00',
                 'end' => '13:00:00',
-                'color' => '#c40233'
+                'color' => '#c40233',
+                'room' => '1',
+                'description' => 'Reunião com cliente'
             ],
             [
                 'title' => 'Academia',
                 'start' => '18:30:00',
                 'end' => '20:00:00',
-                'color' => '#29fdf2'
+                'color' => '#29fdf2',
+                'room' => '1',
+                'description' => 'Reunião com cliente'
             ]
         ]);
     }

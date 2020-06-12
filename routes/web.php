@@ -71,14 +71,12 @@ Route::get('/', function () {
     Route::put('/people/update/{id}', ['uses'=>'PeopleController@update', 'as' => 'people.update']);
     Route::get('/people/delete/{id}', ['uses'=>'PeopleController@delete', 'as' => 'people.delete']);
 
-
     Route::get('/homeClient', 'FullCalendarController@index')->name('index');
     // Eventos
     Route::get('/load-events', 'EventController@loadEvents')->name('routeLoadEvents');
     Route::put('/event-update', 'EventController@update')->name('routeEventUpdate');
     Route::post('/event-store', 'EventController@store')->name('routeEventStore');
     Route::delete('/event-destroy', 'EventController@destroy')->name('routeEventDelete');
-    
     
     Route::get('/eventADM', 'FullCalendarController@eventADM')->name('index');
 

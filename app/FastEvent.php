@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FastEvent extends Model
 {
     use SoftDeletes;
-
+    protected $table = 'fast_events';
     protected $fillable = [
         'title',
         'start', 
@@ -16,6 +16,5 @@ class FastEvent extends Model
         'color',
         'room',
         'description'
-
     ];
 }

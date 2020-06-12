@@ -107,7 +107,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: element.event.title,
                 id: element.event.id,
                 start: start,
-                end: end
+                end: end,
+                room: room,
+                description: description
             };
 
             sendEvent(routeEvents('routeEventUpdate'), newEvent);
@@ -129,6 +131,12 @@ document.addEventListener('DOMContentLoaded', function() {
             $("#modalCalendar input[name='end']").val(end);
 
             $("#modalCalendar input[name='color']").val("#3788D8");
+
+            let room = element.event.extendedProps.room;
+            $("#modalCalendar select[name='room']").val(room);
+
+            let description = element.event.extendedProps.description;
+            $("#modalCalendar textarea[name='description']").val(description);
 
             calendar.unselect();
 

@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\FastEvent;
 use App\Http\Requests\FastEventRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; // para usar o SQL
+use Alert;
 
 class FastEventController extends Controller
 {
     public function store(FastEventRequest $request)
     {
         $fastEvent = FastEvent::create($request->all());
-
+ 
         return response()->json(['created' => $fastEvent->id]);
     }
 

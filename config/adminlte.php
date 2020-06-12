@@ -124,7 +124,7 @@ return [
         [
             'text' => 'Criar uma reunião',
             'icon' => 'calendar-plus-o',
-            'url'  => '/event/add',
+            'url'  => '/meeting/add',
         ],
         [
             'text' => 'Teste',

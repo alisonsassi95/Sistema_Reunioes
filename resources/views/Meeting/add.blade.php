@@ -1,17 +1,21 @@
-<div class="modal fade" id="modalCalendar" tabindex="-1" role="dialog" aria-labelledby="titleModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="titleModal">Título do modal</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
+﻿@extends('adminlte::page')
 
-                <div class="message"></div>
-                    <form id="formEvent">
-                        <div class="form-group row">
+@section('title', 'Cadastro de Reunião')
+
+@section('content')
+
+<div class="box box-primary">
+ <div class="box-header with-border">
+    <h3 class="box-title">Cadastro de Reunião</h3>
+ </div>
+ <div role="form">
+        <div class="box-body">
+            @include('sweet::alert')
+
+                    <form action="{{ route('meeting.save') }}" method="post">
+                    {{ csrf_field() }}
+
+                    <div class="form-group row">
                             <label for="title" class="col-sm-4 col-form-label">Titulo</label>
                             <div class="col-sm-8">
                                 <input type="text" name="title" class="form-control" id="title">
@@ -53,7 +57,7 @@
                             <div class="col-sm-8">
                                 <input readOnly = "true" type="text" name="condition" value = "Reunião agendada" class="form-control" id="condition">
                             </div>
-
+                        </div>
                         <div class="form-group row">
                             <label for="participants_id" class="col-sm-4 col-form-label">Participantes</label>
                             <div class="col-sm-8">
@@ -70,15 +74,24 @@
                                 <textarea name="description" id="description" cols="40" rows="4"></textarea>
                             </div>
                         </div>
+
+                        <button class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Adicionar</button> 
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-danger deleteEvent">Excluir</button>
-                <button type="button" class="btn btn-primary saveEvent">Salvar</button>
             </div>
         </div>
     </div>
 </div>
+
+<Script>
+$(function() {
+
+$('.date-time').mask('00/00/0000 00:00:00');
+$('.time').mask('00:00:00');
+</script>
+
+
+@stop
+
+
 
