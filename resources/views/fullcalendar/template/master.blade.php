@@ -18,7 +18,6 @@
 <script src="assets/fullcalendarNPM/js/fullcalendar.js"></script>
 <script src="assets/fullcalendarNPM/js/jquery-and-mask-and-moment.js"></script>
 <script src="assets/fullcalendarNPM/js/bootstrap.js"></script>
-
 <script src="assets/fullcalendarNPM/js/scriptCalendar.js"></script>
 <!--
 <script src='{{asset('assets/fullcalendarNPM/js/fullcalendar.js')}}'></script>

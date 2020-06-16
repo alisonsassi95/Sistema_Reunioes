@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\User;
-use App\People;
+use App\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; // para usar o SQL
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -29,10 +29,19 @@ class HomeController extends Controller
     public function index()
     {
      
-        $Usuarios = DB::select('SELECT * FROM users');  
-        
+        $results = DB::select('SELECT
+                                events.id as id, 
+                                events.title as titulo, 
+                                events.start as Data_Inicial,
+                                events.end as Data_Final,
+                                room.name sala,
+                                events.condition as status,
+                                events.priority as prioridade
+                                FROM events
+                                left join room ON room.id = events.room_id');  
+
         return view('home', [
-            'Usuarios' => $Usuarios,
+            'results' => $results,
             ]);
     }
 }

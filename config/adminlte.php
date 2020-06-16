@@ -112,9 +112,12 @@ return [
         [
             'text' => 'Inicio',
             'icon' => 'home',
+            'url'  => '/home',
+        ],
+        [
+            'text' => 'Agenda',
+            'icon' => 'home',
             'url'  => '/homeClient',
-            //'can'  => 'user',
-
         ],
         [
             'text' => 'Meu perfil',
@@ -127,23 +130,13 @@ return [
             'url'  => '/meeting/add',
         ],
         [
-            'text' => 'Teste',
-            'icon' => 'calendar-plus-o',
-            'url'  => '/teste',
-        ],
-        [
             'text' => 'Consulta Reuniões',
             'icon' => 'cube',
             'can'  => 'adm',
             'url'  => '/eventADM',
         ],      
 
-        [
-            'text' => 'Inicio',
-            'icon' => 'home',
-            'url'  => '/home',
-            //'can'  => 'adm',
-        ],
+
         [
             'text'    => 'Cadastro/Consulta',
             'icon'    => 'folder-open',

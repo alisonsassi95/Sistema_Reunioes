@@ -19,7 +19,7 @@ class Meeting extends Model
         'priority', 
         'participants', 
         'room_id', 
-        'user_id'
+        'requester_id'
     ];
 
 }

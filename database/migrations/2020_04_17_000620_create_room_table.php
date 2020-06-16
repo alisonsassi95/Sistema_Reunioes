@@ -21,6 +21,10 @@ class CreateroomTable extends Migration
             $table->string('capacity', 45)->nullable(); 
             $table->text('description')->nullable();
             $table->boolean('active')->default(true);
+            //Chave estrangeira de Perfil
+            $table->integer('equipament_id')->unsigned()->nullable();
+            $table->foreign('equipament_id')->references('id')->on('equipaments');
+            // Chave estrangeira de Perfil   
             $table->timestamps();
             $table->softDeletes();
         });

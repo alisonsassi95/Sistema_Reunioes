@@ -10,102 +10,7 @@
   <div>
 
     <!-- Main content -->
-    <section class="content">
-
-      @cannot('user')
-        
-      <!-- Info boxes -->
-      <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-people-outline"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Quant. Usuários</span>
-            <span class="info-box-number"><small></small></span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="ion ion-ios-people-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Quant. Médicos</span>
-              <span class="info-box-number"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="clearfix visible-sm-block"></div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="ion ion-ios-people-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Quant. Funcionários</span>
-              <span class="info-box-number"></span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Quant. Pacientes</span>
-              <span class="info-box-number"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-       <!-- LATERAL -->
-       
-          <!-- Info Boxes Style 2 -->
-          <div class="row">
-              <div class="col-md-3 col-sm-6 col-xs-12">
-
-          <div class="info-box bg-yellow">
-            <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Exames Solicitados</span>
-              <span class="info-box-number"></span>
-          </div>
-        </div>
-          <div class="info-box bg-green">
-            <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Exames Realizados</span>
-              <span class="info-box-number"><</span>
-            </div>
-          </div>
-
-
-          <div class="info-box bg-red">
-            <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Exames Cancelados</span>
-              <span class="info-box-number"></span>
-            </div>
-          </div>
-          <div class="info-box bg-aqua">
-            <span class="info-box-icon"><i class="ion-ios-pricetag-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Exames Agendados</span>
-              <span class="info-box-number"></span>
-            </div>
-          </div>
-        </div>
-
-    
-
-
-       <!-- fim da Info boxes -->
-
+    <section class="content">        
        <!-- INICIO DA TABELA -->
 
         <div class="col-md-9">
@@ -113,7 +18,7 @@
 
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Próximos</h3>
+              <h3 class="box-title">Próximas reuniões </h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -126,25 +31,38 @@
                 <table id="lista1" class="table table-bordered table-striped dataTable" role="grid">
                       <thead>
                           <tr>
-                              <th>ID</th>
-                              <th>Paciente</th>
-                              <th>Médico</th>
-                              <th>Data Realizada</th>
-                              <th>Tipo Equipamento</th>
-                              <th>Staus</th>
+                              <th>Titulo</th>
+                              <th>Data Inicial</th>
+                              <th>Data Final</th>
+                              <th>Local</th>
+                              <th>Status</th>
+                              <th>Prioridade</th>
+                              <th>Ação</th>
                               </tr>
                       </thead>
                       <tbody>
-                                                
+                      @foreach($results as $x)
+                      <tr>
+                              <th scope="row">{{ $x->titulo }}</th>
+                              <td>{{ $x->Data_Inicial }}</td>
+                              <td>{{ $x->Data_Final }}</td>
+                              <td>{{ $x->sala }}</td>
+                              <td>{{ $x->status }}</td>
+                              <td>{{ $x->prioridade }}</td>
+                              <td>    
+                                    <a class="btn btn-default"><i class="glyphicon glyphicon-edit"></i >  Editar</a>
+                                    <a class="btn btn-danger" href="javascript:(confirm('Deletar esse registro?') ? window.location.href='{{route('meeting.delete',$x->id)}}' : false)"><i class="glyphicon glyphicon-trash"></i > Deletar</a>
+                                    
+                              </td>
+                          <tr>
+                      @endforeach                           
                       </tbody>
                   </table>
 
                   <div class="box-footer clearfix">
-                      <a href="" class="btn btn-sm btn-primary btn-flat">Criar um novo Exame</a>
-                      <a href="" class="btn btn-sm btn-warning btn-flat ">Ver todos os exames</a>
+                      <a href="" class="btn btn-sm btn-primary btn-flat">Criar</a>
+                      <a href="" class="btn btn-sm btn-warning btn-flat ">Ver todos</a>
                     </div>
-
-      
               </div> 
               <!-- FIM DA div class="table-responsive"> -->
             </div>
@@ -154,12 +72,7 @@
                         
           </div>
           <!-- FIM DA TABELA -->
-          </div>
-
-        </section>
-    </div>
-
-    
+    @cannot('user')
     @endcannot('user')
     
 <!-- jQuery 3 -->

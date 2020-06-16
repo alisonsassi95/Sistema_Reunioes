@@ -22,7 +22,7 @@ class EventController extends Controller
             'priority', 
             'participants', 
             'room_id', 
-            'user_id'];
+            'requester_id'];
 
         $start = (!empty($request->start)) ? ($request->start) : ('');
         $end = (!empty($request->end)) ? ($request->end) : ('');

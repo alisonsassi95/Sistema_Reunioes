@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var calendarEl = document.getElementById('calendar');
     var calendar = new Calendar(calendarEl, {
-        plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+        plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         locale: 'pt-br',
         navLinks: true,
         eventLimit: true,
-        selectable: true,
+        selectable:true,
         editable: true,
         droppable: true, // this allows things to be dropped onto the calendar
         drop: function(element) {
@@ -54,29 +54,29 @@ document.addEventListener('DOMContentLoaded', function() {
             sendEvent(routeEvents('routeEventStore'), Event);
 
         },
-        eventDrop: function(element) {
+        eventDrop: function(element){
 
             let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
             let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
 
             let newEvent = {
-                _method: 'PUT',
+                _method:'PUT',
                 title: element.event.title,
                 id: element.event.id,
                 start: start,
                 end: end
             };
 
-            sendEvent(routeEvents('routeEventUpdate'), newEvent, calendar);
+            sendEvent(routeEvents('routeEventUpdate'),newEvent,calendar);
 
         },
-        eventClick: function(element) {
+        eventClick: function(element){
             clearMessages('.message');
             resetForm("#formEvent");
 
             $("#modalCalendar").modal('show');
             $("#modalCalendar #titleModal").text('Alterar Evento');
-            $("#modalCalendar button.deleteEvent").css("display", "flex");
+            $("#modalCalendar button.deleteEvent").css("display","flex");
 
             let id = element.event.id;
             $("#modalCalendar input[name='id']").val(id);
@@ -98,23 +98,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         },
-        eventResize: function(element) {
+        eventResize: function(element){
             let start = moment(element.event.start).format("YYYY-MM-DD HH:mm:ss");
             let end = moment(element.event.end).format("YYYY-MM-DD HH:mm:ss");
 
             let newEvent = {
-                _method: 'PUT',
+                _method:'PUT',
                 title: element.event.title,
                 id: element.event.id,
                 start: start,
-                end: end,
-                room: room,
-                description: description
+                end: end
             };
 
-            sendEvent(routeEvents('routeEventUpdate'), newEvent);
+            sendEvent(routeEvents('routeEventUpdate'),newEvent);
         },
-        select: function(element) {
+        select: function(element){
 
             clearMessages('.message');
             resetForm("#formEvent");
@@ -122,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             $("#modalCalendar").modal('show');
             $("#modalCalendar #titleModal").text('Adicionar Evento');
-            $("#modalCalendar button.deleteEvent").css("display", "none");
+            $("#modalCalendar button.deleteEvent").css("display","none");
 
             let start = moment(element.start).format("DD/MM/YYYY HH:mm:ss");
             $("#modalCalendar input[name='start']").val(start);
@@ -132,16 +130,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             $("#modalCalendar input[name='color']").val("#3788D8");
 
-            let room = element.event.extendedProps.room;
-            $("#modalCalendar select[name='room']").val(room);
-
-            let description = element.event.extendedProps.description;
-            $("#modalCalendar textarea[name='description']").val(description);
-
             calendar.unselect();
 
         },
-        eventReceive: function(element) {
+        eventReceive: function(element){
             element.event.remove();
         },
         events: routeEvents('routeLoadEvents'),

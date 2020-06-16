@@ -17,10 +17,9 @@ class Event extends Model
         'color', 
         'description', 
         'condition', 
-        'priority', 
-        'participants', 
+        'priority',
         'room_id', 
-        'user_id'
+        'requester_id'
     ];
 
     public function getStartAttribute($value)
