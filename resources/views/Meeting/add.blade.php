@@ -3,6 +3,8 @@
 @section('title', 'Cadastro de Reunião')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('../css/select2.min.css') }}">
+<script src="{{ asset('../js/select2.full.min.js') }}" > </script>
 
 <div class="box box-primary">
  <div class="box-header with-border">
@@ -23,7 +25,7 @@
                     <div class="form-group row {{$errors->has('title') ? 'has-error' : '' }}" value="{{ old('title') }}">
                             <label for="title" class="col-sm-4 col-form-label">Titulo</label>
                             <div class="col-sm-8">
-                                <input type="text" required name="title" class="form-control" id="title">
+                                <input type="text" required name="title" class="form-control" placeholder= "Título da Reunião" id="title">
                                 <input type="hidden" name="id">
                             </div>
                         @if($errors->has('title'))
@@ -88,20 +90,20 @@
 
                         <div class="form-group row">
                             <label for="participants" class="col-sm-4 col-form-label">Participantes</label>
-                            <div class="col-sm-8">
+                            <div  class="col-sm-8">
                                 <select id="participants" name="participants[]" width = "20" class="mdb-select md-form colorful-select dropdown-primary" multiple searchable="Pesquise por nome">
-                                    <option value="" disabled selected>Escolha os participantes</option>
+                                    <option value="" disabled selected>Escolha os nome dos participantes que irão participar da reunião.</option>
                                     @foreach($parts as $part)
                                         <option value="{{ $part->id }}">{{ $part->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
- 
+
                         <div class="form-group row">
                             <label for="description" class="col-sm-4 col-form-label">Descrição</label>
                             <div class="col-sm-8">
-                                <textarea name="description" id="description" cols="80" rows="4"></textarea>
+                                <textarea name="description" placeholder="Descrição" id="description" cols="80" rows="4"></textarea>
                             </div>
                         </div>
 

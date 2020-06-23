@@ -45,24 +45,24 @@ class meetingController extends Controller
     {
         $data_inicial = $request->get('start');
         $data_final = $request->get('end');
+        $Sala = $request->get('room_id');
         
-        $Verificacao = DB::select("
-                        SELECT 
-                        events.id
-                        FROM events 
-                        LEFT JOIN participants ON events.id = participants.event_id 
-                        WHERE events.start BETWEEN '".$data_inicial."' AND '".$data_final."'
-                        AND events.end BETWEEN '".$data_inicial."' AND '".$data_final."'
-                        AND participants.user_id IN (1) ");
+        $verificar_data = DB::select("
+                                        SELECT 
+                                        events.id
+                                        FROM events 
+                                        LEFT JOIN participants ON events.id = participants.event_id 
+                                        LEFT JOIN room ON room.id = events.room_id
+                                        WHERE events.start BETWEEN '".$data_inicial."' AND '".$data_final."'
+                                        AND events.end BETWEEN '".$data_inicial."' AND '".$data_final."'
+                                        AND room.id = ".$Sala.";");       
 
-            if(!empty($Verificacao)){
+            if(!empty($verificar_data)){
                 return redirect()
                                 ->back()
-                                ->with('info', 'Já existe uma reunião nesse horário!');      
+                                ->with('errors', 'Uma reunião nesse horário, já está marcada na Sala!');      
             }
-           /* existe outra reuniao nesse mesmo horário?
 
-        participantes da nova reuniao é igual os participantes da reuniao com o mesmo horario?*/
         try{
             //salvar o evento
             $event= new Event();
@@ -83,32 +83,44 @@ class meetingController extends Controller
         if(is_null($items)){
              $items = $request->input('requester_id'); 
         }
+
         for ($i = 0; $i <= count($items)-1; $i++) {
             $participants = new Participants();
             $participants->event_id= $event->id;
             $participants->user_id= (int)$items[$i];
             $participants->save();
         }
-      
-        return redirect('/home')->with('sucess', 'Sucesso!');
 
+        return redirect()
+                        ->route('home')
+                        ->with('success', 'Reunião agendada com Sucesso!');
+      
         //Se caso der algum erro, dará essa mmensagem
         }catch(Exception $e) {
             return alert()->success('', 'Falha ao inserir.')->persistent('OK');
-
         }  
       
     }
     // Função Responsavel por trazer a tela de edição de meetingos
     public function edit ($id)
     {
-        $meeting = meeting::find($id);
+        $meeting =  DB::select('SELECT
+                                events.id as id, 
+                                events.title, 
+                                events.room_id,
+                                room.name as sala,
+                                events.start,
+                                events.end,
+                                events.color,
+                                events.condition,
+                                events.description
+                                FROM events
+                                left join room ON room.id = events.room_id');
+
         if(!$meeting){
-            \Session::flash('flash_message', [
-                'msg'=>"Não existe esse item cadastrado, deseja cadastrar um novo?",
-                'class'=>"alert-danger"
-            ]);
-            return redirect()->back();
+            return redirect()
+                    ->back()
+                    ->with('info', 'Não encontrado!');
         }
         return view('meeting.edit', ['meeting' => $meeting]);
         
@@ -127,12 +139,12 @@ class meetingController extends Controller
     // Função Responsavel pela exclusão de um meetingo
     public function delete($id)
     {
-        $meeting = meeting::find($id);
-        $meeting->delete();
 
-        alert()->success('', 'Deletado com Sucesso')->persistent('OK');
+        Event::where('id', $id)->delete();
 
-        return redirect()->route('meeting.index');        
+        return redirect()
+                    ->route('meeting.index')
+                    ->with('info', 'Deletado com Sucesso!');       
         
     }
 }

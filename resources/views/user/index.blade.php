@@ -25,7 +25,7 @@
                                 <th></th>
                                 <th>Nome</th>
                                 <th>Email</th>
-                                <th>Ativo</th>
+                                <th>Setor</th>
                                 <th>Ação</th>
                                 </tr>
                         </thead>
@@ -35,7 +35,7 @@
                                 <th scope="row">{{ $x->id }}</th>
                                 <td>{{ $x->name }}</td>
                                 <td>{{ $x->email }}</td>
-                                <td>{{ $x->ativo }}</td>
+                                <td>{{ $x->sector }}</td>
                                 <td>    
                                     <a class="btn btn-default" href="{{route('User.edit',$x->id)}}"><i class="glyphicon glyphicon-edit"></i > Editar</a>
                                     <a class="btn btn-danger" href="javascript:(confirm('Deletar esse registro?') ? window.location.href='{{route('User.delete',$x->id)}}' : false)"><i class="glyphicon glyphicon-trash"></i >   Deletar</a>

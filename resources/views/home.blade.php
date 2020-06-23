@@ -50,19 +50,70 @@
                               <td>{{ $x->status }}</td>
                               <td>{{ $x->prioridade }}</td>
                               <td>    
-                                    <a class="btn btn-default"><i class="glyphicon glyphicon-edit"></i >  Editar</a>
-                                    <a class="btn btn-danger" href="javascript:(confirm('Deletar esse registro?') ? window.location.href='{{route('meeting.delete',$x->id)}}' : false)"><i class="glyphicon glyphicon-trash"></i > Deletar</a>
-                                    
+                                    <a class="btn btn-default" href="{{route('meeting.edit',$x->id)}}"> <i class="glyphicon glyphicon-edit"></i > Editar</a>
+                                    <a class="btn btn-danger" href="javascript:(confirm('Deletar esse registro?') ? window.location.href='{{route('meeting.delete',$x->id)}}' : false)"><i class="glyphicon glyphicon-trash"></i > Deletar</a> 
                               </td>
                           <tr>
                       @endforeach                           
                       </tbody>
                   </table>
+              </div> 
+              <!-- FIM DA div class="table-responsive"> -->
+            </div>
+            <!-- FIM DA box-header -->
+        </div>
+      </div>
+                        
+          </div>
+          <!-- FIM DA TABELA -->
 
-                  <div class="box-footer clearfix">
-                      <a href="" class="btn btn-sm btn-primary btn-flat">Criar</a>
-                      <a href="" class="btn btn-sm btn-warning btn-flat ">Ver todos</a>
-                    </div>
+
+
+          <!-- Main content -->
+    <section class="content">        
+       <!-- INICIO DA TABELA -->
+
+        <div class="col-md-9">
+          <div class="row">
+
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Reuniões realizadas</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            
+            <div class="box-body">
+                <table id="lista1" class="table table-bordered table-striped dataTable" role="grid">
+                      <thead>
+                          <tr>
+                              <th>Titulo</th>
+                              <th>Data Inicial</th>
+                              <th>Data Final</th>
+                              <th>Local</th>
+                              <th>Status</th>
+                              <th>Ata da Reunião</th>
+                              </tr>
+                      </thead>
+                      <tbody>
+                      @foreach($passadas as $y)
+                      <tr>
+                              <th scope="row">{{ $y->titulo }}</th>
+                              <td>{{ $y->Data_Inicial }}</td>
+                              <td>{{ $y->Data_Final }}</td>
+                              <td>{{ $y->sala }}</td>
+                              <td>{{ $y->status }}</td>
+                              <td>
+                              <a class="btn btn-primary"> <i class="glyphicon glyphicon-send"></i > Ata Reunião</a>
+                              </td>      
+                          <tr>
+                      @endforeach                           
+                      </tbody>
+                  </table>
               </div> 
               <!-- FIM DA div class="table-responsive"> -->
             </div>
